@@ -16,7 +16,15 @@ main = do
       moonEq   = eclipticToEquatorial moon
       moonHz   = equatorialToHorizon observer 0.0 moonEq
 
-  putStrLn "=== Project Moon ==="
+  putStrLn "=== Orrery ==="
+  putStrLn ""
+
+  -- Step 1: verify Julian Day
+  let (JulianDay jdVal) = jd
+  putStrLn $ "Julian Day: " ++ show jdVal
+  -- Sanity check: 2000-01-01 12:00 UTC = JD 2451545.0
+  let (JulianDay j2k) = toJulianDay 2000 1 1 12 0 0
+  putStrLn $ "J2000 check: " ++ show j2k ++ " (expect 2451545.0)"
   putStrLn ""
   putStrLn $ formatPosition "Sun " sun
   putStrLn $ formatPosition "Moon" moon

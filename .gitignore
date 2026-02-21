@@ -1,0 +1,14 @@
+# Cabal build artifacts
+dist-newstyle/
+
+# Generated images
+*.ppm
+
+# Editor files
+*~
+*.swp
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db

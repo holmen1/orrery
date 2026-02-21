@@ -1,7 +1,7 @@
 module Moon.Types
   ( Angle(..)
-  , Degrees
-  , Radians
+  , Degrees(..)
+  , Radians(..)
   , EclipticCoord(..)
   , EquatorialCoord(..)
   , HorizonCoord(..)

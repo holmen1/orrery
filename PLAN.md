@@ -1,7 +1,16 @@
-# Project Moon 🌙
+# Orrery 🌙
 
 A mixed Haskell/C project to predict the position of the Moon (and Sun)
 and render a raytraced visualization with correct illumination.
+
+## Copilot Working Rules
+
+- **Don't run ahead.** One step at a time. Wait for confirmation before moving on.
+- **Show terminal output.** Let me see `cabal run` results — don't swallow them.
+- **Keep code minimal.** No over-engineering, no unnecessary abstractions.
+- **No bloat.** Every line earns its place.
+- **Walking skeleton.** Every step must leave `cabal run` working.
+- **Read this file** if chat history is lost — it has the full plan and progress.
 
 ## Architecture
 
@@ -83,33 +92,66 @@ and render a raytraced visualization with correct illumination.
 Both outputs derive from the same Sun & Moon positions,
 so the image and the pointing direction always agree.
 
-## Time Plan
+## Time Plan (Walking Skeleton)
 
-### Session 1 — Foundation
-- Set up skeleton ✅
-- Implement Julian Day conversion (Haskell, pure math)
-- Implement solar position (C, Meeus Ch. 25, ~20 lines of trig)
-- Verify Sun against a known date
+Every step ends with `cabal run` producing correct output.
+No step leaves the project in a broken state.
 
-### Session 2 — The Moon
-- Implement lunar position (C, Meeus Ch. 47, the big one: ~60 terms)
-- Wire up FFI for both Sun and Moon
-- Verify Moon against known date
+### Step 0 — Skeleton ✅
+- Project structure, stubs, compiles and runs
+- Output: zeroes everywhere, but it runs
+- **Commit: "skeleton"**
 
-### Session 3 — Where to Look
-- Ecliptic → equatorial transform
-- Equatorial → horizon (observer lat/lon + sidereal time)
-- CLI prints "look at azimuth X°, altitude Y°"
+### Step 1 — Julian Day (pure Haskell) ✅
+- Implement `toJulianDay` in Moon.Time (Meeus Ch. 7)
+- Main prints computed JD for hardcoded date
+- Verify: 2000-01-01 12:00 UTC → JD 2451545.0
+- `cabal run` → prints correct Julian Day
+- Hurdles:
+  - `ghc-pkg` not on PATH → fixed with `export PATH="/usr/lib/ghc-9.6.6/bin:$PATH"`
+  - `Degrees(..)` constructor not exported from Types.hs → added `(..)` to exports
+  - Type-defaults warnings on `fromIntegral` → added explicit `:: Double` annotations
+- **Commit: "julian day"**
 
-### Session 4 — Raytracer
-- Ray-sphere intersection
-- Sun illumination (dot product shading)
-- PPM output — first rendered Moon!
+### Step 2 — Solar position (C + FFI)
+- Implement `sun_position()` in ephemeris.c (Meeus Ch. 25)
+- Wire FFI in Moon.FFI (foreign import ccall, marshalling)
+- Main prints Sun ecliptic lon/lat/dist
+- Verify: compare against USNO for a known date
+- `cabal run` → prints Sun position
+- **Commit: "sun ephemeris"**
 
-### Session 5 — Integration & Polish
-- Full pipeline: date + location → alt/az + image
-- Validate against tonight's actual sky
-- Earthshine, limb darkening if we feel ambitious
+### Step 3 — Lunar position (C + FFI)
+- Implement `moon_position()` in ephemeris.c (Meeus Ch. 47, ~60 terms)
+- Wire FFI (same pattern as Sun)
+- Main prints both Sun and Moon positions
+- Verify: compare Moon against USNO
+- `cabal run` → prints Sun + Moon positions
+- **Commit: "moon ephemeris"**
+
+### Step 4 — Coordinate transforms (pure Haskell)
+- Implement ecliptic → equatorial in Moon.Coords
+- Implement equatorial → horizon in Moon.Coords
+- Implement sidereal time in Moon.Time
+- Main prints "Look at azimuth X°, altitude Y°"
+- Verify: compare alt/az against Stellarium or USNO
+- `cabal run` → prints where to look in the sky
+- **Commit: "coordinates"**
+
+### Step 5 — Raytracer (C + FFI)
+- Implement ray-sphere intersection in raytrace.c
+- Implement Sun illumination (dot product shading)
+- PPM output of lit Moon sphere
+- Wire FFI, Main calls renderer after computing positions
+- `cabal run` → prints position + writes moon.ppm with correct phase
+- **Commit: "raytracer"**
+
+### Step 6 — Polish
+- CLI argument parsing (date + observer location)
+- Earthshine, limb darkening
+- Lunar surface texture (optional)
+- `cabal run 2026-02-21T22:00 59.33 18.07` → full output
+- **Commit: "v1.0"**
 
 ## Key References
 
