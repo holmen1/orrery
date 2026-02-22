@@ -1,10 +1,10 @@
 module Main where
 
-import Moon.Types
-import Moon.Time
-import Moon.FFI
-import Moon.Coords
-import Moon.Display
+import Orrery.Types
+import Orrery.Time
+import Orrery.FFI
+import Orrery.Coords
+import Orrery.Display
 
 main :: IO ()
 main = do

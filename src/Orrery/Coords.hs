@@ -1,9 +1,9 @@
-module Moon.Coords
+module Orrery.Coords
   ( eclipticToEquatorial
   , equatorialToHorizon
   ) where
 
-import Moon.Types
+import Orrery.Types
 
 -- | Ecliptic → Equatorial, given obliquity of ecliptic
 --   TODO: Meeus Ch. 13

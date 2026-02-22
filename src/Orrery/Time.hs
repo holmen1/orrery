@@ -1,4 +1,4 @@
-module Moon.Time
+module Orrery.Time
   ( JulianDay(..)
   , toJulianDay
   ) where

@@ -49,10 +49,10 @@ and render a raytraced visualization with correct illumination.
 ## Milestones
 
 ### Phase 1 — Ephemeris
-- [ ] C: Solar position (geocentric ecliptic lon/lat/dist)
-- [ ] C: Lunar position (geocentric ecliptic lon/lat/dist)
-- [ ] Haskell: Julian Day conversion
-- [ ] Haskell: FFI bindings to ephemeris
+- [x] C: Solar position (geocentric ecliptic lon/lat/dist)
+- [x] C: Lunar position (geocentric ecliptic lon/lat/dist)
+- [x] Haskell: Julian Day conversion
+- [x] Haskell: FFI bindings to ephemeris
 - [ ] Haskell: Ecliptic → equatorial (RA/Dec)
 - [ ] Haskell: Equatorial → horizon (altitude/azimuth for observer lat/lon)
 - [ ] Validate against known positions (e.g. USNO data)
@@ -115,11 +115,10 @@ No step leaves the project in a broken state.
 
 ### Step 2 — Solar position (C + FFI)
 - Implement `sun_position()` in ephemeris.c (Meeus Ch. 25)
-- Wire FFI in Moon.FFI (foreign import ccall, marshalling)
+- Wire FFI in Orrery.FFI (foreign import ccall, marshalling)
 - Main prints Sun ecliptic lon/lat/dist
 - Verify: compare against USNO for a known date
 - `cabal run` → prints Sun position
-- **Commit: "sun ephemeris"**
 
 ### Step 3 — Lunar position (C + FFI)
 - Implement `moon_position()` in ephemeris.c (Meeus Ch. 47, ~60 terms)
@@ -127,7 +126,7 @@ No step leaves the project in a broken state.
 - Main prints both Sun and Moon positions
 - Verify: compare Moon against USNO
 - `cabal run` → prints Sun + Moon positions
-- **Commit: "moon ephemeris"**
+- **Commit: "ephemeris"**
 
 ### Step 4 — Coordinate transforms (pure Haskell)
 - Implement ecliptic → equatorial in Moon.Coords

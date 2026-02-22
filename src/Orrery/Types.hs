@@ -1,4 +1,4 @@
-module Moon.Types
+module Orrery.Types
   ( Angle(..)
   , Degrees(..)
   , Radians(..)
