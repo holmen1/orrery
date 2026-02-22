@@ -1,6 +1,12 @@
 # Cabal build artifacts
 dist-newstyle/
 
+# GHC build artifacts
+*.o
+*.hi
+*.dyn_o
+*.dyn_hi
+
 # Generated images
 *.ppm
 
