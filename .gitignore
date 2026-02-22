@@ -12,3 +12,6 @@ dist-newstyle/
 # OS junk
 .DS_Store
 Thumbs.db
+
+build/
+
