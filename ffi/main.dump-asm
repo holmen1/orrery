@@ -1,0 +1,344 @@
+[1 of 2] Compiling Main             ( main.hs, main.o )
+
+==================== Asm code ====================
+.section .rodata.str,"aMS",@progbits,1
+.align 1
+.align 1
+.L$trModule3_rOL_bytes:
+	.string "Main"
+
+
+
+==================== Asm code ====================
+.section .rodata.str,"aMS",@progbits,1
+.align 1
+.align 1
+.L$trModule1_rOJ_bytes:
+	.string "main"
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.L$trModule2_rOK_closure:
+	.quad	GHC.Types.TrNameS_con_info
+	.quad	.L$trModule1_rOJ_bytes
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.L$trModule4_rOM_closure:
+	.quad	GHC.Types.TrNameS_con_info
+	.quad	.L$trModule3_rOL_bytes
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.globl Main.$trModule_closure
+.type Main.$trModule_closure, @object
+Main.$trModule_closure:
+	.quad	GHC.Types.Module_con_info
+	.quad	.L$trModule2_rOK_closure+1
+	.quad	.L$trModule4_rOM_closure+1
+	.quad	3
+
+
+
+==================== Asm code ====================
+.section .text
+.align 8
+.align 8
+	.quad	0
+	.long	15
+	.long	0
+.Lsat_sRN_info:
+.LcSa:
+	leaq -24(%rbp),%rax
+	cmpq %r15,%rax
+	jb .LcSb
+.LcSc:
+	movq $stg_upd_frame_info,-16(%rbp)
+	movq %rbx,-8(%rbp)
+	leaq ghczuwrapperZC0ZCmainZCMainZCadd(%rip),%rax
+	movl $2,%ebx
+	movl $2,%ecx
+	movq $.Lblock_cS7_info,-24(%rbp)
+	addq $-24,%rbp
+	movq 872(%r13),%rdx
+	movq 24(%rdx),%rsi
+	movq %rbp,16(%rsi)
+	movq 888(%r13),%rsi
+	leaq 8(%r12),%rdi
+	movq %rdi,8(%rsi)
+	leaq 8(%r12),%rdi
+	subq (%rsi),%rdi
+	movq 112(%rdx),%rsi
+	subq %rdi,%rsi
+	movq %rsi,112(%rdx)
+	subq $8,%rsp
+	movq %r13,%rdi
+	xorl %esi,%esi
+	movq %rax,%rdx
+	xorl %eax,%eax
+	movq %rcx,72(%rsp)
+	movq %rdx,%r14
+	call suspendThread
+	addq $8,%rsp
+	subq $8,%rsp
+	movq 72(%rsp),%rcx
+	movq %rcx,%rsi
+	movq %rbx,%rdi
+	movq %rax,%rbx
+	xorl %eax,%eax
+	call *%r14
+	addq $8,%rsp
+	subq $8,%rsp
+	movq %rbx,%rdi
+	movq %rax,%rbx
+	xorl %eax,%eax
+	call resumeThread
+	addq $8,%rsp
+	movq %rax,%r13
+	movq 872(%r13),%rax
+	movq 24(%rax),%rcx
+	movq 16(%rcx),%rbp
+	leaq 192(%rcx),%r15
+	movq $0,904(%r13)
+	movq 888(%r13),%rcx
+	movq 8(%rcx),%rdx
+	leaq -8(%rdx),%r12
+	movq (%rcx),%rsi
+	movslq 48(%rcx),%rcx
+	shlq $12,%rcx
+	decq %rcx
+	movq %rsi,%rdi
+	addq %rcx,%rdi
+	movq %rdi,856(%r13)
+	subq %rsi,%rdx
+	movq 112(%rax),%rcx
+	addq %rdx,%rcx
+	movq %rcx,112(%rax)
+	jmp *(%rbp)
+.align 8
+	.quad	0
+	.long	30
+	.long	0
+.Lblock_cS7_info:
+.LcS7:
+	addq $16,%r12
+	cmpq 856(%r13),%r12
+	ja .LcSf
+.LcSe:
+	movq $GHC.Types.I#_con_info,-8(%r12)
+	movq %rbx,(%r12)
+	leaq -7(%r12),%rax
+	movq %rax,%rbx
+	addq $8,%rbp
+	jmp *(%rbp)
+.LcSb:
+	jmp *-16(%r13)
+.LcSf:
+	movq $16,904(%r13)
+	jmp stg_gc_unbx_r1
+	.size .Lsat_sRN_info, .-.Lsat_sRN_info
+
+
+
+==================== Asm code ====================
+.section .text
+.align 8
+.align 8
+	.quad	0
+	.long	21
+	.long	GHC.Show.$fShowInt_closure-(.Lsat_sRO_info)+0
+.Lsat_sRO_info:
+.LcSq:
+	leaq -32(%rbp),%rax
+	cmpq %r15,%rax
+	jb .LcSr
+.LcSs:
+	addq $16,%r12
+	cmpq 856(%r13),%r12
+	ja .LcSu
+.LcSt:
+	subq $8,%rsp
+	movq %r13,%rax
+	movq %rbx,%rsi
+	movq %rax,%rdi
+	xorl %eax,%eax
+	call newCAF
+	addq $8,%rsp
+	testq %rax,%rax
+	je .LcRZ
+.LcRY:
+	movq $stg_bh_upd_frame_info,-16(%rbp)
+	movq %rax,-8(%rbp)
+	movq $.Lsat_sRN_info,-8(%r12)
+	leaq -8(%r12),%rax
+	leaq GHC.Show.$fShowInt_closure(%rip),%r14
+	movq $stg_ap_p_info,-32(%rbp)
+	movq %rax,-24(%rbp)
+	addq $-32,%rbp
+	jmp GHC.Show.show_info
+.LcRZ:
+	jmp *(%rbx)
+.LcSu:
+	movq $16,904(%r13)
+.LcSr:
+	jmp *-16(%r13)
+	.size .Lsat_sRO_info, .-.Lsat_sRO_info
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.Lsat_sRO_closure:
+	.quad	.Lsat_sRO_info
+	.quad	0
+	.quad	0
+	.quad	0
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.LuT1_srt:
+	.quad	stg_SRT_3_info
+	.quad	GHC.Base.$_closure
+	.quad	System.IO.putStrLn_closure
+	.quad	.Lsat_sRO_closure
+	.quad	0
+
+
+
+==================== Asm code ====================
+.section .text
+.align 8
+.align 8
+	.quad	0
+	.long	21
+	.long	.LuT1_srt-(Main.main_info)+0
+.globl Main.main_info
+.type Main.main_info, @function
+Main.main_info:
+.LcSY:
+	leaq -16(%rbp),%rax
+	cmpq %r15,%rax
+	jb .LcSZ
+.LcT0:
+	subq $8,%rsp
+	movq %r13,%rax
+	movq %rbx,%rsi
+	movq %rax,%rdi
+	xorl %eax,%eax
+	call newCAF
+	addq $8,%rsp
+	testq %rax,%rax
+	je .LcSX
+.LcSW:
+	movq $stg_bh_upd_frame_info,-16(%rbp)
+	movq %rax,-8(%rbp)
+	leaq .Lsat_sRO_closure(%rip),%rsi
+	leaq System.IO.putStrLn_closure(%rip),%r14
+	leaq GHC.Base.$_closure(%rip),%rbx
+	addq $-16,%rbp
+	jmp stg_ap_pp_fast
+.LcSX:
+	jmp *(%rbx)
+.LcSZ:
+	jmp *-16(%r13)
+	.size Main.main_info, .-Main.main_info
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.globl Main.main_closure
+.type Main.main_closure, @object
+Main.main_closure:
+	.quad	Main.main_info
+	.quad	0
+	.quad	0
+	.quad	0
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.LuTh_srt:
+	.quad	stg_SRT_2_info
+	.quad	GHC.TopHandler.runMainIO_closure
+	.quad	Main.main_closure
+	.quad	0
+
+
+
+==================== Asm code ====================
+.section .text
+.align 8
+.align 8
+	.quad	0
+	.long	21
+	.long	.LuTh_srt-(:Main.main_info)+0
+.globl :Main.main_info
+.type :Main.main_info, @function
+:Main.main_info:
+.LcTe:
+	leaq -16(%rbp),%rax
+	cmpq %r15,%rax
+	jb .LcTf
+.LcTg:
+	subq $8,%rsp
+	movq %r13,%rax
+	movq %rbx,%rsi
+	movq %rax,%rdi
+	xorl %eax,%eax
+	call newCAF
+	addq $8,%rsp
+	testq %rax,%rax
+	je .LcTd
+.LcTc:
+	movq $stg_bh_upd_frame_info,-16(%rbp)
+	movq %rax,-8(%rbp)
+	leaq Main.main_closure(%rip),%r14
+	leaq GHC.TopHandler.runMainIO_closure(%rip),%rbx
+	addq $-16,%rbp
+	jmp stg_ap_p_fast
+.LcTd:
+	jmp *(%rbx)
+.LcTf:
+	jmp *-16(%r13)
+	.size :Main.main_info, .-:Main.main_info
+
+
+
+==================== Asm code ====================
+.section .data
+.align 8
+.align 1
+.globl :Main.main_closure
+.type :Main.main_closure, @object
+:Main.main_closure:
+	.quad	:Main.main_info
+	.quad	0
+	.quad	0
+	.quad	0
+
+
+[2 of 2] Linking main [Objects changed]

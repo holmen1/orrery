@@ -1,0 +1,53 @@
+
+on the commandline: warning: [-Wdeprecated-flags]
+    -ddump-stg is deprecated: Use `-ddump-stg-from-core` or `-ddump-stg-final` instead
+[1 of 2] Compiling Main             ( main.hs, main.o )
+
+==================== Initial STG: ====================
+$trModule1_rOJ :: GHC.Prim.Addr#
+[GblId, Unf=OtherCon []] =
+    "main"#;
+
+$trModule2_rOK :: GHC.Types.TrName
+[GblId, Unf=OtherCon []] =
+    GHC.Types.TrNameS! [$trModule1_rOJ];
+
+$trModule3_rOL :: GHC.Prim.Addr#
+[GblId, Unf=OtherCon []] =
+    "Main"#;
+
+$trModule4_rOM :: GHC.Types.TrName
+[GblId, Unf=OtherCon []] =
+    GHC.Types.TrNameS! [$trModule3_rOL];
+
+Main.$trModule :: GHC.Types.Module
+[GblId, Unf=OtherCon []] =
+    GHC.Types.Module! [$trModule2_rOK $trModule4_rOM];
+
+sat_sRO :: GHC.Base.String
+[LclId] =
+    \u []
+        let {
+          sat_sRN [Occ=Once1] :: GHC.Types.Int
+          [LclId] =
+              \u []
+                  case
+                      __ffi_static_ccall_safe main:ghczuwrapperZC0ZCmainZCMainZCadd :: [2#
+                                                                                        2#
+                                                                                        GHC.Prim.realWorld#]
+                  of
+                  {
+                  (#,#) _ [Occ=Dead] ds1_sRM [Occ=Once1] -> GHC.Types.I# [ds1_sRM];
+                  };
+        } in  GHC.Show.show GHC.Show.$fShowInt sat_sRN;
+
+Main.main :: GHC.Types.IO ()
+[GblId] =
+    \u [] GHC.Base.$ System.IO.putStrLn sat_sRO;
+
+:Main.main :: GHC.Types.IO ()
+[GblId] =
+    \u [] GHC.TopHandler.runMainIO Main.main;
+
+
+[2 of 2] Linking main [Objects changed]

@@ -1,0 +1,60 @@
+[1 of 2] Compiling Main             ( main.hs, main.o )
+
+==================== Tidy Core ====================
+Result size of Tidy Core
+  = {terms: 30, types: 24, coercions: 0, joins: 0/0}
+
+-- RHS size: {terms: 1, types: 0, coercions: 0, joins: 0/0}
+$trModule1_rOJ :: GHC.Prim.Addr#
+[GblId, Unf=OtherCon []]
+$trModule1_rOJ = "main"#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0, joins: 0/0}
+$trModule2_rOK :: GHC.Types.TrName
+[GblId, Unf=OtherCon []]
+$trModule2_rOK = GHC.Types.TrNameS $trModule1_rOJ
+
+-- RHS size: {terms: 1, types: 0, coercions: 0, joins: 0/0}
+$trModule3_rOL :: GHC.Prim.Addr#
+[GblId, Unf=OtherCon []]
+$trModule3_rOL = "Main"#
+
+-- RHS size: {terms: 2, types: 0, coercions: 0, joins: 0/0}
+$trModule4_rOM :: GHC.Types.TrName
+[GblId, Unf=OtherCon []]
+$trModule4_rOM = GHC.Types.TrNameS $trModule3_rOL
+
+-- RHS size: {terms: 3, types: 0, coercions: 0, joins: 0/0}
+Main.$trModule :: GHC.Types.Module
+[GblId, Unf=OtherCon []]
+Main.$trModule = GHC.Types.Module $trModule2_rOK $trModule4_rOM
+
+-- RHS size: {terms: 12, types: 14, coercions: 0, joins: 0/0}
+main :: IO ()
+[GblId]
+main
+  = $ @GHC.Types.LiftedRep
+      @String
+      @(IO ())
+      putStrLn
+      (show
+         @Int
+         GHC.Show.$fShowInt
+         (case {__ffi_static_ccall_safe main:ghczuwrapperZC0ZCmainZCMainZCadd :: Int#
+                                                                  -> Int#
+                                                                  -> State# RealWorld
+                                                                  -> (# State# RealWorld, Int# #)}_dOD
+                 2# 2# GHC.Prim.realWorld#
+          of
+          { (# ds_dOC, ds1_dOB #) ->
+          GHC.Types.I# ds1_dOB
+          }))
+
+-- RHS size: {terms: 2, types: 1, coercions: 0, joins: 0/0}
+:Main.main :: IO ()
+[GblId]
+:Main.main = GHC.TopHandler.runMainIO @() main
+
+
+
+[2 of 2] Linking main [Objects changed]
