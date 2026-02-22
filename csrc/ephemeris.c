@@ -9,7 +9,7 @@
 static const double DEG2RAD = 3.14159265358979323846 / 180.0;
 static const double AU_KM   = 149597870.7;
 
-EclipticCoord sun_position(double jd) {
+void sun_position(double jd, double *out) {
     /* Julian centuries from J2000.0  (Eq. 25.1) */
     double T = (jd - 2451545.0) / 36525.0;
 
@@ -41,26 +41,9 @@ EclipticCoord sun_position(double jd) {
     double apparent_lon = sun_lon - 0.00569
                         - 0.00478 * sin(omega * DEG2RAD);
 
-    EclipticCoord c;
-    c.longitude = apparent_lon;
-    c.latitude  = 0.0;            /* always < 0.001° */
-    c.distance  = R * AU_KM;
-    return c;
-}
-
-/* FFI-friendly wrappers: write struct fields into double[3] */
-void sun_position_raw(double jd, double *out) {
-    EclipticCoord c = sun_position(jd);
-    out[0] = c.longitude;
-    out[1] = c.latitude;
-    out[2] = c.distance;
-}
-
-void moon_position_raw(double jd, double *out) {
-    EclipticCoord c = moon_position(jd);
-    out[0] = c.longitude;
-    out[1] = c.latitude;
-    out[2] = c.distance;
+    out[0] = apparent_lon;
+    out[1] = 0.0;           /* latitude always < 0.001° */
+    out[2] = R * AU_KM;
 }
 
 /*
@@ -70,7 +53,7 @@ void moon_position_raw(double jd, double *out) {
  * and Table 47.B (latitude).  Precision ~0.07° in longitude, ~0.04° in
  * latitude — plenty for visual phase rendering.
  */
-EclipticCoord moon_position(double jd) {
+void moon_position(double jd, double *out) {
     double T  = (jd - 2451545.0) / 36525.0;
     double T2 = T * T;
     double T3 = T2 * T;
@@ -313,9 +296,7 @@ EclipticCoord moon_position(double jd) {
     lon = fmod(lon, 360.0);
     if (lon < 0.0) lon += 360.0;
 
-    EclipticCoord c;
-    c.longitude = lon;
-    c.latitude  = lat;
-    c.distance  = dist;
-    return c;
+    out[0] = lon;
+    out[1] = lat;
+    out[2] = dist;
 }

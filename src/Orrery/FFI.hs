@@ -10,10 +10,10 @@ import Foreign.Ptr (Ptr)
 import Foreign.Marshal.Array (allocaArray, peekArray)
 import System.IO.Unsafe (unsafePerformIO)
 
-foreign import ccall "sun_position_raw"
+foreign import ccall "sun_position"
   c_sun_position :: Double -> Ptr Double -> IO ()
 
-foreign import ccall "moon_position_raw"
+foreign import ccall "moon_position"
   c_moon_position :: Double -> Ptr Double -> IO ()
 
 -- | Sun geocentric ecliptic position for a given Julian Day
