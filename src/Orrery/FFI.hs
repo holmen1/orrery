@@ -1,3 +1,4 @@
+{-# LANGUAGE CApiFFI #-}
 module Orrery.FFI
   ( moonPosition
   , sunPosition
@@ -10,10 +11,10 @@ import Foreign.Ptr (Ptr)
 import Foreign.Marshal.Array (allocaArray, peekArray)
 import System.IO.Unsafe (unsafePerformIO)
 
-foreign import ccall "sun_position"
+foreign import capi "ephemeris.h sun_position"
   c_sun_position :: Double -> Ptr Double -> IO ()
 
-foreign import ccall "moon_position"
+foreign import capi "ephemeris.h moon_position"
   c_moon_position :: Double -> Ptr Double -> IO ()
 
 -- | Sun geocentric ecliptic position for a given Julian Day

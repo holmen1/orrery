@@ -1,4 +1,4 @@
-cabal-version:      3.0
+cabal-version:      3.4
 name:               orrery
 version:            0.1.0.0
 synopsis:           Predict the position of the Moon and render it
@@ -7,7 +7,7 @@ author:             holmen1
 build-type:         Simple
 
 executable orrery
-  default-language: Haskell2010
+  default-language: GHC2021
   hs-source-dirs:   src
   main-is:          Main.hs
   other-modules:    Orrery.Types
@@ -15,7 +15,7 @@ executable orrery
                   , Orrery.FFI
                   , Orrery.Coords
                   , Orrery.Display
-  build-depends:    base >= 4.14 && < 5
+  build-depends:    base ^>= 4.18
   c-sources:        csrc/ephemeris.c
                   , csrc/raytrace.c
   include-dirs:     csrc

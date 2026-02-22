@@ -1,3 +1,4 @@
+{-# LANGUAGE CApiFFI #-}
 foreign import capi "adder.h add"
   c_add :: Int -> Int -> Int
 
