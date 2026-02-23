@@ -125,3 +125,28 @@ leaq -7(%r12),%rax                     ; tagged pointer (tag bit = 1)
 
 Using `unsafe` instead of safe would remove the `suspendThread`/`resumeThread`
 pair entirely.
+
+// ...existing code...
+
+### Dynamic dependencies
+
+```sh
+ldd main
+```
+
+Lists the shared libraries loaded at runtime — all from GHC's RTS, not from our C code (which was statically linked via `adder.o`):
+
+| Library | Purpose |
+|---|---|
+| `linux-vdso.so.1` | Virtual DSO injected by the kernel — fast syscalls (no disk file) |
+| `libm.so.6` | C math library — pulled in by GHC's RTS |
+| `libgmp.so.10` | GNU Multiple Precision — GHC uses it for `Integer` (arbitrary precision) |
+| `libc.so.6` | Standard C library — `malloc`, `printf`, etc. |
+| `libffi.so.8` | Foreign Function Interface library — GHC's RTS uses it for dynamic calls |
+| `libnuma.so.1` | NUMA memory policy — GHC RTS uses for memory allocation on multi-socket systems |
+| `ld-linux-x86-64.so.2` | The dynamic linker/loader itself |
+
+Key takeaway: our tiny `add` function adds **zero** runtime library dependencies.
+All the weight comes from GHC's runtime system (GMP for `Integer`, libffi for
+dynamic dispatch, libnuma for heap management).
+// ...existing code...
