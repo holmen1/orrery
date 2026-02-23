@@ -7,7 +7,8 @@ author:             holmen1
 build-type:         Simple
 
 executable orrery
-  default-language: GHC2021
+  default-language:   GHC2021
+  default-extensions: CApiFFI
   hs-source-dirs:   src
   main-is:          Main.hs
   other-modules:    Orrery.Types

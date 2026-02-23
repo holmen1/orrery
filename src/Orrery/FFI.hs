@@ -1,4 +1,3 @@
-{-# LANGUAGE CApiFFI #-}
 module Orrery.FFI
   ( moonPosition
   , sunPosition
