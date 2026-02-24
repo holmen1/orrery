@@ -10,11 +10,12 @@ main :: IO ()
 main = do
   -- Example: 2026-02-21 22:00:00 UTC, Stockholm
   let observer = Observer (Degrees 59.33) (Degrees 18.07)
-      jd       = toJulianDay 2026 2 21 22 0 0
+      jd       = toJulianDay 2026 2 24 19 10 0
       sun      = sunPosition jd
       moon     = moonPosition jd
-      moonEq   = eclipticToEquatorial moon
-      moonHz   = equatorialToHorizon observer 0.0 moonEq
+      gst      = toGreenwichSiderealTime jd
+      moonEq   = eclipticToEquatorial jd moon
+      moonHz   = equatorialToHorizon observer gst moonEq
 
   putStrLn "=== Orrery ==="
   putStrLn ""
@@ -28,6 +29,11 @@ main = do
   putStrLn ""
   putStrLn $ formatPosition "Sun " sun
   putStrLn $ formatPosition "Moon" moon
+  putStrLn ""
+  let (Degrees gstVal) = gst
+  putStrLn $ "GST: " ++ show gstVal ++ "°"
+  let EquatorialCoord (Degrees raVal) (Degrees decVal) = moonEq
+  putStrLn $ "Moon RA: " ++ showDeg raVal ++ "  Dec: " ++ showDeg decVal
   putStrLn ""
   putStrLn $ formatHorizon moonHz
   putStrLn ""

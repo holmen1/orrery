@@ -1,7 +1,10 @@
 module Orrery.Time
   ( JulianDay(..)
   , toJulianDay
+  , toGreenwichSiderealTime
   ) where
+
+import Orrery.Types (Degrees(..))
 
 -- | Julian Day number
 newtype JulianDay = JulianDay Double deriving (Show)
@@ -30,3 +33,16 @@ toJulianDay year month day hour minute second =
          + fromIntegral b
          - 1524.5
   in  JulianDay jd
+
+-- | Greenwich Mean Sidereal Time as degrees in [0, 360).
+--   Meeus, Astronomical Algorithms, Ch. 12, Eq. 12.4
+toGreenwichSiderealTime :: JulianDay -> Degrees
+toGreenwichSiderealTime (JulianDay jd) =
+  let t     = (jd - 2451545.0) / 36525.0
+      theta = 280.46061837
+            + 360.98564736629 * (jd - 2451545.0)
+            + 0.000387933     * t * t
+            - t * t * t       / 38710000.0
+  in  Degrees (normalise theta)
+  where
+    normalise x = x - 360.0 * fromIntegral (floor (x / 360.0) :: Int)

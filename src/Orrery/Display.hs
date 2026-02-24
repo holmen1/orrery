@@ -1,6 +1,7 @@
 module Orrery.Display
   ( formatHorizon
   , formatPosition
+  , showDeg
   ) where
 
 import Orrery.Types
@@ -9,6 +10,10 @@ import Orrery.Types
 formatHorizon :: HorizonCoord -> String
 formatHorizon (HorizonCoord (Degrees alt) (Degrees az)) =
   "Look at azimuth " ++ show (round az :: Int) ++ "°, altitude " ++ show (round alt :: Int) ++ "°"
+
+-- | Format decimal degrees compactly (2 decimal places)
+showDeg :: Double -> String
+showDeg d = show (fromIntegral (round (d * 100) :: Int) / 100.0 :: Double) ++ "°"
 
 -- | Format decimal degrees as d° m' s"
 showDMS :: Double -> String

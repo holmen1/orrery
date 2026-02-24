@@ -53,8 +53,8 @@ and render a raytraced visualization with correct illumination.
 - [x] C: Lunar position (geocentric ecliptic lon/lat/dist)
 - [x] Haskell: Julian Day conversion
 - [x] Haskell: FFI bindings to ephemeris
-- [ ] Haskell: Ecliptic → equatorial (RA/Dec)
-- [ ] Haskell: Equatorial → horizon (altitude/azimuth for observer lat/lon)
+- [x] Haskell: Ecliptic → equatorial (RA/Dec)
+- [x] Haskell: Equatorial → horizon (altitude/azimuth for observer lat/lon)
 - [ ] Validate against known positions (e.g. USNO data)
 
 ### Phase 2 — Raytracer
@@ -113,14 +113,14 @@ No step leaves the project in a broken state.
   - Type-defaults warnings on `fromIntegral` → added explicit `:: Double` annotations
 - **Commit: "julian day"**
 
-### Step 2 — Solar position (C + FFI)
+### Step 2 — Solar position (C + FFI) ✅
 - Implement `sun_position()` in ephemeris.c (Meeus Ch. 25)
 - Wire FFI in Orrery.FFI (foreign import ccall, marshalling)
 - Main prints Sun ecliptic lon/lat/dist
 - Verify: compare against USNO for a known date
 - `cabal run` → prints Sun position
 
-### Step 3 — Lunar position (C + FFI)
+### Step 3 — Lunar position (C + FFI) ✅
 - Implement `moon_position()` in ephemeris.c (Meeus Ch. 47, ~60 terms)
 - Wire FFI (same pattern as Sun)
 - Main prints both Sun and Moon positions
@@ -128,7 +128,7 @@ No step leaves the project in a broken state.
 - `cabal run` → prints Sun + Moon positions
 - **Commit: "ephemeris"**
 
-### Step 4 — Coordinate transforms (pure Haskell)
+### Step 4 — Coordinate transforms (pure Haskell) ✅
 - Implement ecliptic → equatorial in Moon.Coords
 - Implement equatorial → horizon in Moon.Coords
 - Implement sidereal time in Moon.Time
@@ -172,7 +172,7 @@ moon/
 │   └── raytrace.c        -- Sphere rendering with Sun illumination
 └── src/
     ├── Main.hs           -- CLI entry point
-    └── Moon/
+    └── Orrery/
         ├── Types.hs      -- Astronomical types (Angle, Coord, Body)
         ├── Time.hs       -- Date ↔ Julian Day
         ├── FFI.hs        -- Foreign imports (ephemeris + raytracer)

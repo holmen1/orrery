@@ -6,6 +6,22 @@ Predict where the Moon is and render what it looks like — Haskell + C.
 
 ```
 cabal run orrery
+=== Orrery ===
+
+Julian Day: 2461096.298611111
+J2000 check: 2451545.0 (expect 2451545.0)
+
+Sun : lon 336° 11' 15"  lat 0° 0' 0"  dist 148,061,725 km
+Moon: lon 69° 51' 36"  lat 5° 16' 52"  dist 370,139 km
+
+GST: 82.1729655507952°
+Moon RA: 67.34°  Dec: 27.15°
+
+Look at azimuth 230°, altitude 51°
+
+Rendering...
+TODO: raytracer FFI
+Done. Output: moon.ppm
 ```
 
 Requires GHC 9.6+ and a C compiler. That's it.
