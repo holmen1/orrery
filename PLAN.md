@@ -57,11 +57,11 @@ and render a raytraced visualization with correct illumination.
 - [x] Haskell: Equatorial → horizon (altitude/azimuth for observer lat/lon)
 - [ ] Validate against known positions (e.g. USNO data)
 
-### Phase 2 — Raytracer
-- [ ] C: Ray-sphere intersection
-- [ ] C: Illumination from Sun direction vector
-- [ ] C: PPM image output
-- [ ] Haskell: FFI bindings to raytracer
+### Step 5 — Raytracer (C + FFI)
+- [x] C: Ray-sphere intersection
+- [x] C: Illumination from Sun direction vector
+- [x] C: PPM image output
+- [x] Haskell: FFI bindings to raytracer
 - [ ] Render first Moon image with correct phase
 
 ### Phase 3 — Polish
